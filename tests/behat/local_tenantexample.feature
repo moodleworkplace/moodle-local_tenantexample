@@ -3,7 +3,7 @@ Feature: Tenants generator
   As a developer
   I want to be able to use generator for the tenants
 
-  Scenario: Usage of tenants generator
+  Scenario: Usage of tenants generator (local_tenantexample)
     Given the following "users" exist:
       | username | firstname | lastname | email                 |
       | user1    | User      | 1        | user1@address.invalid |
@@ -47,7 +47,7 @@ Feature: Tenants generator
     And I should not see "Course M"
     And I log out
 
-  Scenario: Tenants generator to bulk create tenants and users
+  Scenario: Tenants generator to bulk create tenants and users (local_tenantexample)
     # This step will create users tenantadmin1, user11..user14, tenantadmin2, user21..user24
     Given "2" tenants exist with "5" users and "2" courses in each
     When I log in as "tenantadmin1"
