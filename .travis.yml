@@ -1,17 +1,12 @@
 language: php
 
-sudo: true
-
 addons:
-  firefox: "47.0.1"
   postgresql: "9.4"
-  apt:
-    packages:
-    - chromium-chromedriver
 
 services:
 - mysql
 - postgresql
+- docker
 
 cache:
   directories:
@@ -27,6 +22,7 @@ env:
   - MOODLE_BRANCH=master
   - MOODLE_REPO=https://github.com/moodleworkplace/multitenancy.git
   - PROFILE=chrome
+  - MOODLE_START_BEHAT_SERVERS=NO
   matrix:
   - DB=pgsql
   - DB=mysqli
@@ -40,7 +36,9 @@ before_install:
 - export PATH="$(cd ci/bin; pwd):$(cd ci/vendor/bin; pwd):$PATH"
 
 install:
-- moodle-plugin-ci install
+- moodle-plugin-ci install -vvv
+- docker run -d -p 127.0.0.1:4444:4444 --net=host -v /dev/shm:/dev/shm selenium/standalone-${PROFILE}:3
+- php -S localhost:8000 -t $HOME/build/moodle > /dev/null 2>&1 &
 
 script:
 - moodle-plugin-ci phplint
