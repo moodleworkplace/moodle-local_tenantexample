@@ -19,13 +19,13 @@ php:
 
 env:
   global:
-  - MOODLE_BRANCH=master
-  - MOODLE_REPO=https://github.com/moodleworkplace/multitenancy.git
   - PROFILE=chrome
   - MOODLE_START_BEHAT_SERVERS=NO
   matrix:
-  - DB=pgsql
-  - DB=mysqli
+  - DB=pgsql MOODLE_REPO=https://github.com/moodleworkplace/multitenancy.git MOODLE_BRANCH=master EXCLUDETAGS=&&~@moodleworkplace
+  - DB=pgsql MOODLE_BRANCH=MOODLE_38_STABLE
+  - DB=mysql MOODLE_REPO=https://github.com/moodleworkplace/multitenancy.git MOODLE_BRANCH=master EXCLUDETAGS=&&~@moodleworkplace
+  - DB=mysql MOODLE_BRANCH=MOODLE_38_STABLE
 
 before_install:
 - phpenv config-rm xdebug.ini
@@ -34,6 +34,8 @@ before_install:
 - cd ../..
 - composer create-project -n --no-dev --prefer-dist blackboard-open-source/moodle-plugin-ci ci ^2
 - export PATH="$(cd ci/bin; pwd):$(cd ci/vendor/bin; pwd):$PATH"
+- ls
+- pwd
 
 install:
 - moodle-plugin-ci install -vvv
@@ -51,4 +53,5 @@ script:
 - moodle-plugin-ci grunt
 - moodle-plugin-ci phpdoc
 - moodle-plugin-ci phpunit
-- moodle-plugin-ci behat --profile $PROFILE
+- cd moodle
+- php admin/tool/behat/cli/run.php --tags=@local_tenantexample$EXCLUDETAGS --profile=$PROFILE
