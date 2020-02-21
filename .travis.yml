@@ -15,12 +15,12 @@ cache:
 
 php:
 - 7.2
-- 7.3
 
 env:
   global:
   - PROFILE=chrome
   - MOODLE_START_BEHAT_SERVERS=NO
+  - PLUGINNAME=local_tenantexample # Important! Don't forget to change when copying. (TODO calculate automatically)
   matrix:
   - DB=pgsql MOODLE_REPO=https://github.com/moodleworkplace/multitenancy.git MOODLE_BRANCH=master EXCLUDETAGS=&&~@moodleworkplace
   - DB=pgsql MOODLE_BRANCH=MOODLE_38_STABLE
@@ -34,8 +34,6 @@ before_install:
 - cd ../..
 - composer create-project -n --no-dev --prefer-dist blackboard-open-source/moodle-plugin-ci ci ^2
 - export PATH="$(cd ci/bin; pwd):$(cd ci/vendor/bin; pwd):$PATH"
-- ls
-- pwd
 
 install:
 - moodle-plugin-ci install -vvv
@@ -54,4 +52,4 @@ script:
 - moodle-plugin-ci phpdoc
 - moodle-plugin-ci phpunit
 - cd moodle
-- php admin/tool/behat/cli/run.php --tags=@local_tenantexample$EXCLUDETAGS --profile=$PROFILE
+- php admin/tool/behat/cli/run.php --tags="@$PLUGINNAME$EXCLUDETAGS" --profile=$PROFILE --suite=default
