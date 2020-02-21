@@ -1,5 +1,5 @@
 @local @local_tenantexample @javascript
-Feature: Tenants generator
+Feature: Tenants generator (local_tenantexample)
   As a developer
   I want to be able to use generator for the tenants
 
