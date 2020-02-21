@@ -24,8 +24,8 @@ env:
   matrix:
   - DB=pgsql MOODLE_REPO=https://github.com/moodleworkplace/multitenancy.git MOODLE_BRANCH=master EXCLUDETAGS=&&~@moodleworkplace
   - DB=pgsql MOODLE_BRANCH=MOODLE_38_STABLE
-  - DB=mysql MOODLE_REPO=https://github.com/moodleworkplace/multitenancy.git MOODLE_BRANCH=master EXCLUDETAGS=&&~@moodleworkplace
-  - DB=mysql MOODLE_BRANCH=MOODLE_38_STABLE
+  - DB=mysqli MOODLE_REPO=https://github.com/moodleworkplace/multitenancy.git MOODLE_BRANCH=master EXCLUDETAGS=&&~@moodleworkplace
+  - DB=mysqli MOODLE_BRANCH=MOODLE_38_STABLE
 
 before_install:
 - phpenv config-rm xdebug.ini
