@@ -22,10 +22,10 @@ env:
   - MOODLE_START_BEHAT_SERVERS=NO
   - PLUGINNAME=local_tenantexample # Important! Don't forget to change when copying. (TODO calculate automatically)
   matrix:
-  - DB=pgsql MOODLE_REPO=https://github.com/moodleworkplace/multitenancy.git MOODLE_BRANCH=master EXCLUDETAGS=&&~@moodleworkplace
-  - DB=pgsql MOODLE_BRANCH=MOODLE_38_STABLE
-  - DB=mysqli MOODLE_REPO=https://github.com/moodleworkplace/multitenancy.git MOODLE_BRANCH=master EXCLUDETAGS=&&~@moodleworkplace
-  - DB=mysqli MOODLE_BRANCH=MOODLE_38_STABLE
+  - DB=pgsql MOODLE_REPO=https://github.com/moodleworkplace/multitenancy.git MOODLE_BRANCH=master
+  - DB=pgsql MOODLE_BRANCH=MOODLE_38_STABLE EXCLUDETAGS="&&~@moodleworkplace"
+  - DB=mysqli MOODLE_REPO=https://github.com/moodleworkplace/multitenancy.git MOODLE_BRANCH=master
+  - DB=mysqli MOODLE_BRANCH=MOODLE_38_STABLE EXCLUDETAGS="&&~@moodleworkplace"
 
 before_install:
 - phpenv config-rm xdebug.ini
