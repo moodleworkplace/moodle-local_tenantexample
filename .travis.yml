@@ -21,11 +21,12 @@ env:
   - PROFILE=chrome
   - MOODLE_START_BEHAT_SERVERS=NO
   - PLUGINNAME=local_tenantexample # Important! Don't forget to change when copying. (TODO detect automatically)
+  - MOODLE_BRANCH=MOODLE_38_STABLE
   matrix:
-  - DB=pgsql MOODLE_REPO=https://github.com/moodleworkplace/multitenancy.git MOODLE_BRANCH=master
-  - DB=pgsql MOODLE_BRANCH=MOODLE_38_STABLE EXCLUDETAGS="&&~@moodleworkplace"
-  - DB=mysqli MOODLE_REPO=https://github.com/moodleworkplace/multitenancy.git MOODLE_BRANCH=master
-  - DB=mysqli MOODLE_BRANCH=MOODLE_38_STABLE EXCLUDETAGS="&&~@moodleworkplace"
+  - DB=pgsql MOODLE_REPO=https://github.com/moodleworkplace/multitenancy.git
+  - DB=pgsql EXCLUDETAGS="&&~@moodleworkplace"
+  - DB=mysqli MOODLE_REPO=https://github.com/moodleworkplace/multitenancy.git
+  - DB=mysqli EXCLUDETAGS="&&~@moodleworkplace"
 
 before_install:
 - phpenv config-rm xdebug.ini
